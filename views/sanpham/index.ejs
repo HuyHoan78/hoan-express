@@ -23,7 +23,7 @@
                             <div class="container-fluid">
 
                                 <!-- Page Heading -->
-                                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                                <h1 class="h3 mb-2 text-gray-800">Bảng Sản Phẩm</h1>
 
                                 <!-- DataTales Example -->
                                 <div class="card shadow mb-4">
@@ -32,24 +32,25 @@
                                     </div>
                                     <div class="card-body">
                                         <a href="/admin/sanpham/create">
-                                            <button class="btn-info">Add</button>
+                                            <button class="btn-info">Thêm</button>
                                         </a>
                                         <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th>id</th>
+                                                        <th>Mã Sản Phẩm</th>
+                                                        <th>MaNCC</th>
                                                         <th>MaLoai</th>
-                                                        <th>TenSanPham</th>
-                                                        <th>MoTaSanPham</th>
-                                                        <th>AnhDaiDien</th>
-                                                        <th>MaNSX</th>
-                                                        <th>MaDonViTinh</th>
-                                                        <th>GiaBan</th>
+                                                        <th>TenSP</th>
+                                                        <th>DviTinh</th>
+                                                        <th>Gia</th>
+                                                        <!-- <th>Mota</th> -->
+                                                        <th>Anh</th>
                                                         <th>Trạng Thái</th>
+                                                        <th>Hoạt Động</th>
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
+                                                <!-- <tfoot>
                                                     <tr>
                                                         <th>id</th>
                                                         <th>MaLoai</th>
@@ -61,42 +62,43 @@
                                                         <th>GiaBan</th>
                                                         <th>Trạng Thái</th>
                                                     </tr>
-                                                </tfoot>
+                                                </tfoot> -->
                                                 <tbody>
 
-                                                    <% sp.forEach(function(item) { %>
+                                                    <% SanPham1.forEach(function(item) { %>
                                                         <tr>
                                                             <td>
-                                                                <%= item.id %>
+                                                                <%= item.MaSP %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.MaNCC %>
                                                             </td>
                                                             <td>
                                                                 <%= item.MaLoai %>
                                                             </td>
                                                             <td>
-                                                                <%= item.TenSanPham %>
+                                                                <%= item.TenSP %>
                                                             </td>
                                                             <td>
-                                                                <%= item.MoTaSanPham %>
+                                                                <%= item.DviTinh %>
                                                             </td>
                                                             <td>
-                                                                <%= item.AnhDaiDien %>
+                                                                <%= item.Gia %>
                                                             </td>
+                                                            <!-- <td>
+                                                                <%= item.MoTa %>
+                                                            </td> -->
                                                             <td>
-                                                                <%= item.MaNSX %>
-                                                            </td>
-                                                            <td>
-                                                                <%= item.MaDonViTinh %>
-                                                            </td>
-                                                            <td>
-                                                                <%= item.GiaBan %>
+                                                                <img style="width:135px" src="/home/images/<%= item.Anh %>" alt="">
+
                                                             </td>
                                                             <td>
                                                                 <%= item.TrangThai %>
                                                             </td>
                                                             <td>
 
-                                                                <a href="/admin/sanpham/update/<%= item.id %>"><button class="btn-primary">edit</button></a>
-                                                                <button onclick="deleteUser('<%= item.id %>')" class="btn-danger">delete</button>
+                                                                <a href="/admin/sanpham/update/<%= item.MaSP %>"><button class="btn-primary">Sửa</button></a>
+                                                                <button onclick="deleteUser('<%= item.MaSP %>')" class="btn-danger">Xóa</button>
                                                             </td>
                                                         </tr>
                                                         <% }); %>
@@ -138,7 +140,7 @@
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">
                             <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Your Website 2020</span>
+                                <span>Nguyễn Đức Hiệp_10120038_Bán Vợt Cầu Lông</span>
                             </div>
                         </div>
                     </footer>

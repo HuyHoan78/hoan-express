@@ -1,0 +1,142 @@
+<%- include('../shared/admin/header') -%>
+
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <%- include('../shared/admin/sidebar') -%>
+                <!-- End of Sidebar -->
+
+                <!-- Content Wrapper -->
+                <div id="content-wrapper" class="d-flex flex-column">
+
+                    <!-- Main Content -->
+                    <div id="content">
+
+                        <!-- Topbar -->
+                        <%- include('../shared/admin/topbar') -%>
+                            <!-- End of Topbar -->
+
+                            <!-- Begin Page Content -->
+                            <div class="container-fluid">
+
+                                <!-- Page Heading -->
+                                <h1 class="h3 mb-2 text-gray-800">Bảng Khách Hàng</h1>
+
+                                <!-- DataTales Example -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Thông tin bảng </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="/admin/khachhang/create">
+                                            <button class="btn-info"> Thêm </button>
+                                        </a>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã Khách Hàng</th>
+                                                        <th>Tên Khách Hàng</th>
+                                                        <th>Giới Tính </th>
+                                                        <th>Ngày Sinh</th>
+                                                        <th>SĐT</th>
+                                                        <th>địa chỉ </th>
+                                                        <th>Email </th>
+                                                        <th>Hành Động</th>
+                                                    </tr>
+                                                </thead>
+                                                <!-- <tfoot>
+                                                    <tr>
+                                                        <th>Mã Loại</th>
+                                                        <th>Tên Loại</th>
+                                                        <th>Trạng thái</th>
+                                                        <th>Hành Động</th>
+                                                    </tr>
+                                                </tfoot> -->
+                                                <tbody>
+
+                                                    <% khachhang2.forEach(function(item) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= item.MaKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.TenKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.GioiTinhKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.NgaySinhKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.SdtKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.DiaChiKH %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.EmailKH %>
+                                                            </td>
+                                                            <td>
+
+                                                                <a href="/admin/khachhang/update/<%= item.MaKH %>"><button class="btn-primary">Sửa</button></a>
+                                                                <button onclick="deleteUser('<%= item.MaKH %>')" class="btn-danger">Xóa</button>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    function deleteUser(userId) {
+                                        if (confirm('Bạn có chắc chắn muốn xóa? ')) {
+                                            fetch(`/admin/nhanvien/delete/${userId}`, {
+                                                    method: 'DELETE',
+                                                })
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error('Lỗi khi xóa');
+                                                    }
+                                                    return response.json();
+                                                })
+                                                .then(data => {
+                                                    alert(data.message);
+                                                    location.reload(); // Tải lại trang sau khi xóa thành công
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                    alert('Đã có lỗi xảy ra.');
+                                                });
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <!-- /.container-fluid -->
+
+                    </div>
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Your Website 2020</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <%- include('../shared/admin/footer') -%>

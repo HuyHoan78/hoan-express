@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <link rel="icon" href="images/fevicon/fevicon.png" type="image/gif" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>HandTime</title>
+
+
+    <!-- bootstrap core css -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="../votcaulong_html/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../votcaulong_html/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../votcaulong_html/css/bootstrap3.3.5.css" />
+    <script type="text/javascript" src="../votcaulong_html/js/jquery.js"></script>
+    <script type="text/javascript" src="../votcaulong_html/js/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" href="/home/">
+                        <span>
+              HandTime
+            </span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/home/">Trang Chủ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html"> Giới Thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="product.html">Sản Phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="testimonial.html">Tin Tức</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Liên Hệ</a>
+                            </li>
+                        </ul>
+                        <div class="user_optio_box">
+                            <a href="/admin/loaisp">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <a href="/home/cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+
+        <!-- <div class="content_container">
+            <div class="container content_home">
+                <div class="row">
+                    <div class="col-md-7 col-sm-7 title_home_sp">
+                        <h2><span>Giỏ Hàng</span></h2>
+                    </div>
+                    <div class="col-md-5 col-sm-5 bg_title">
+                        <div class="row"></div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 box_home">
+                        <div class="content-page">
+                            Giỏ hàng này cần thêm Mai Nguyệt :>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div> -->
+        <div class="columns-container" style="margin: 50px 0px">
+            <div class="container" id="columns">
+                <!-- page heading-->
+                <h2 class="page-heading">
+                    <span class="page-heading-title">Giỏ hàng</span>
+                </h2>
+                <!-- ../page heading-->
+                <div class="page-content page-order">
+
+                    <div class="heading-counter warning">
+                        <span class="fa fa-shopping-cart"></span> Giỏ hàng của bạn có:
+                        <span id="count-item-cart" style="font-weight: bold"></span> <span> sản phẩm</span>
+                    </div>
+
+                    <div class="order-detail-content">
+                        <table class="table table-bordered table-responsive cart_summary">
+
+                            <thead>
+                                <tr>
+                                    <th class="product_thumb">Ảnh Sản Phẩm</th>
+                                    <th class="product_name">Tên Sản Phẩm</th>
+                                    <th class="product-price">Giá</th>
+                                    <th class="product_quantity">Số Lượng</th>
+                                    <th class="product_total">Tổng Tiền</th>
+                                    <th class="product_remove">Xóa</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <% SP.forEach(function(item)  { %>
+                                    <tr>
+                                        <th class="product_thumb">
+                                            <%= item.Anh %>
+                                        </th>
+                                        <th class="product_name">
+                                            <%= item.TenSP %>
+                                        </th>
+                                        <th class="product-price">
+                                            <%= item.Gia %>
+                                        </th>
+                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
+                                        <th class="product_total">
+                                            <%= item.Gia %>
+                                        </th>
+                                        <th class="product_remove">X</th>
+                                    </tr>
+                                    <% }); %>
+                            </thead>
+
+                            <tbody id="show-item-cart">
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5"><strong>Thành tiền (đã gồm thuế): </strong></td>
+                                    <td colspan="1" id="total-item-price" style="font-weight: bold; color: #e84d1c; font-size: 20px;"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="cart_navigation">
+                            <a class="prev-btn" href="/home/">Tiếp tục mua sắm</a>
+                            <a class="next-btn" href="/GioHang/Payment">Thanh toán</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- info section -->
+        <section class="info_section layout_padding2">
+            <div class="container">
+                <div class="info_logo">
+                    <h2>
+                        HandTime
+                    </h2>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="info_contact">
+                            <h5>
+                                About Shop
+                            </h5>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/location-white.png" width="18px" alt="">
+                                </div>
+                                <p>
+                                    Address
+                                </p>
+                            </div>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/telephone-white.png" width="12px" alt="">
+                                </div>
+                                <p>
+                                    +84 0329621239
+                                </p>
+                            </div>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/envelope-white.png" width="18px" alt="">
+                                </div>
+                                <p>
+                                    duchiepk02@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info_info">
+                            <h5>
+                                Informations
+                            </h5>
+                            <p>
+                                ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="info_insta">
+                            <h5>
+                                Instagram
+                            </h5>
+                            <div class="insta_container">
+                                <div class="row m-0">
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w1.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w2.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w3.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w4.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w5.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w6.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="info_form ">
+                            <h5>
+                                Newsletter
+                            </h5>
+                            <form action="">
+                                <input type="email" placeholder="Enter your email">
+                                <button>
+                Subscribe
+              </button>
+                            </form>
+                            <div class="social_box">
+                                <a href="">
+                                    <img src="images/fb.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/twitter.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/linkedin.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/youtube.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- end info_section -->
+
+        <!-- footer section -->
+        <section class="footer_section">
+            <div class="container">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    <a href="https://html.design/">Free Html Templates</a>
+                </p>
+            </div>
+        </section>
+        <!-- footer section -->
+
+        <!-- jQery -->
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <!-- popper js -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <!-- bootstrap js -->
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <!-- custom js -->
+        <script type="text/javascript" src="js/custom.js"></script>
+        <!-- Google Map -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+        </script>
+        <!-- End Google Map -->
+
+        <!-- Javascript files-->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-3.0.0.min.js"></script>
+        <script src="js/plugin.js"></script>
+        <!-- sidebar -->
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/custom.js"></script>
+
+
+        <script>
+            // Hàm để cập nhật giao diện người dùng với danh sách sản phẩm trong giỏ hàng
+            function updateCartUI() {
+                const cartItemsContainer = document.getElementById('cart-items');
+                // const totalCartElement = document.getElementById('cart-total');
+                // const totalPriceElement = document.getElementById('total-price');
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Xóa toàn bộ nội dung trong container trước khi cập nhật lại
+                cartItemsContainer.innerHTML = '';
+                // biến tính tổng tiền 
+                // let totalPrice = 0; 
+                // let totalQuantity = 0;
+                // Hiển thị danh sách sản phẩm trong giỏ hàng sau khi xóa nội dung
+                cart.forEach((product) => {
+                    const item = document.createElement('div');
+                    const giaSanPhamFormatted = parseFloat(product.gia).toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+                    const cartItemPrice = parseFloat(product.gia);
+
+                    // totalPrice += cartItemPrice;
+                    // totalQuantity += 1;
+                    // Thay đổi item.outerHTML thành việc thêm HTML vào phần tử cha của item
+                    cartItemsContainer.insertAdjacentHTML('beforeend', `
+            <tr>
+                
+                <td class="product_thumb"><a href="#"><img src="${product.anh}" alt="" height="200"></a></td>
+                <td class="product_name"><a href="#">${product.ten}</a></td>
+                <td class="product-price">${giaSanPhamFormatted}</td>
+                <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
+                <td class="product_total">${giaSanPhamFormatted}</td>
+                <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                </tr> 
+            
+            `);
+                    cartItemsContainer.appendChild(item);
+                });
+
+                // Cập nhật giá trị của phần tử HTML tổng tiền
+                totalCartElement.textContent = totalQuantity.toLocaleString('vi-VN');
+                totalPriceElement.textContent = totalPriceAll.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+
+            }
+            // Bây giờ gọi hàm `updateCartUI` để cập nhật giao diện người dùng ban đầu khi trang được load
+            updateCartUI();
+        </script>
+</body>
+
+</html>

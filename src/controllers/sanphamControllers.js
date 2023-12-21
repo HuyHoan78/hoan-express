@@ -1,48 +1,42 @@
 // controllers/userController.js
 
+const { render } = require('ejs');
 const db = require('../connects'); // Import module kết nối cơ sở dữ liệu
 
 // Hàm để lấy danh sách người dùng từ cơ sở dữ liệu
 exports.getsanphamAll = async(req, res) => {
 
     try {
-        // const LoaiSP = await new Promise((resolve, reject) => {
-        //     db.query('select * from loaisp', (err, results) => {
-        //         if (err) {
-        //             reject(err);
-        //         } else {
-        //             resolve(results);
-        //         }
-        //     });
-        // });
-        const main = await new Promise((resolve, reject) => {
-            db.query('SELECT * FROM sanpham', (err, results) => {
+        const SanPham = await new Promise((resolve, reject) => {
+            db.query('select * from SanPham', (err, results) => {
                 if (err) {
                     reject(err);
                 } else {
-                    res.render('sanpham/index', {
-                        // LoaiSP: LoaiSP,
-                        sp: results
-                    });
+                    resolve(results);
+                }
+            });
+        });
+        const SanPham1 = await new Promise((resolve, reject) => {
+            db.query('select * from SanPham', (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    // res.render('sanpham/index', {
+                    //     SanPham: SanPham,
+                    //     SanPham1: results
+                    // });
+                    res.json(results);
                 }
             });
         });
     } catch (err) {
         res.status(500).json({ message: 'Lỗi', error: err });
     }
-    db.query('SELECT * FROM sanpham', (err, results) => {
-        if (err) {
-            console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
-            res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
-        } else {
-            res.status(200).json({ data: results });
-        }
-    });
 };
 
 exports.getsanphamById = (req, res) => {
     const { id } = req.params;
-    db.query('SELECT * FROM sanpham WHERE id = ?', [id], (err, results) => {
+    db.query('SELECT * FROM SanPham WHERE MaSP = ?', [id], (err, results) => {
         if (err) {
             console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
             res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
@@ -54,20 +48,20 @@ exports.getsanphamById = (req, res) => {
     });
 };
 
-// // Thêm một loại sản phẩm mới
+// Thêm một loại sản phẩm mới
 exports.createsanpham = (req, res) => {
-    const { MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan } = req.body;
-    const createdAt = null;
-    const updatedAt = null;
+    const { MaSP, MaNCC, MaLoai, TenSP, SoLuong, DviTinh, Gia, Anh, TrangThai } = req.body;
 
     db.query(
-        'INSERT INTO sanpham (MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)', [MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan, createdAt, updatedAt],
+        'INSERT INTO SanPham (MaSP, MaNCC, MaLoai, TenSP,SoLuong, DviTinh, Gia, Anh, TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [MaSP, MaNCC, MaLoai, TenSP, SoLuong, DviTinh, Gia, Anh, TrangThai],
         (err, results) => {
             if (err) {
                 console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
                 res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
             } else {
-                res.json({ id: results.insertId, message: ' Sản phẩm đã được thêm thành công' });
+
+                res.redirect('/admin/sanpham');
+
             }
         }
     );
@@ -76,14 +70,14 @@ exports.createsanpham1 = (req, res) => {
     res.render('sanpham/create');
 };
 
-// // Sửa thông tin một loại sản phẩm bằng ID
+// Sửa thông tin một loại sản phẩm bằng ID
 exports.updatesanpham = (req, res) => {
     const { id } = req.params;
-    const { MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan } = req.body;
-    const updatedAt = null;
+    const { MaNCC, MaLoai, TenSP, SoLuong, DviTinh, Gia, Anh, TrangThai } = req.body;
+    // const updatedAt = null;
 
     db.query(
-        'UPDATE sanpham SET MaLoai = ?, TenSanPham = ?, MoTaSanPham = ?, AnhDaiDien = ?, MaNSX = ?, MaDonViTinh = ?, GiaBan = ? WHERE id = ?', [MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan, id],
+        'UPDATE SanPham SET MaNCC = ?, MaLoai = ?, TenSP = ?,SoLuong=?, DviTinh = ?, Gia = ?, Anh =?, TrangThai =? WHERE MaSP = ?', [MaNCC, MaLoai, TenSP, SoLuong, DviTinh, Gia, Anh, TrangThai, id],
         (err, results) => {
             if (err) {
                 console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
@@ -91,7 +85,7 @@ exports.updatesanpham = (req, res) => {
             } else if (results.affectedRows === 0) {
                 res.status(404).send('Không tìm thấy loại sản phẩm để cập nhật');
             } else {
-                res.json({ message: ' Sản phẩm đã được cập nhật thành công' });
+                res.redirect('/admin/sanpham');
             }
         }
     );
@@ -102,9 +96,9 @@ exports.updatesanpham1 = async(req, res) => {
 
     try {
         const { id } = req.params;
-        const { MaLoai, TenSanPham, MoTaSanPham, AnhDaiDien, MaNSX, MaDonViTinh, GiaBan } = req.body;
-        const LoaiSPByID = await new Promise((resolve, reject) => {
-            db.query('SELECT * FROM sanpham WHERE id = ?', [id], (err, results) => {
+        const { MaNCC, MaLoai, TenSP, SoLuong, DviTinh, Gia, Mota, Anh, TrangThai } = req.body;
+        const SanPhamByID = await new Promise((resolve, reject) => {
+            db.query('SELECT * FROM SanPham WHERE MaSP = ?', [id], (err, results) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -112,8 +106,8 @@ exports.updatesanpham1 = async(req, res) => {
                 }
             });
         });
-        const SP2 = await new Promise((resolve, reject) => {
-            db.query('select * from sanpham', (err, results) => {
+        const SanPham1 = await new Promise((resolve, reject) => {
+            db.query('select * from SanPham', (err, results) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -129,18 +123,18 @@ exports.updatesanpham1 = async(req, res) => {
     }
 };
 
-// // Xóa một loại sản phẩm bằng ID
+// Xóa một loại sản phẩm bằng ID
 exports.deletesanpham = (req, res) => {
     const { id } = req.params;
 
-    db.query('DELETE FROM sanpham WHERE id = ?', [id], (err, results) => {
+    db.query('DELETE FROM SanPham WHERE MaSP = ?', [id], (err, results) => {
         if (err) {
             console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
             res.status(500).send('Lỗi truy vấn cơ sở dữ liệu');
         } else if (results.affectedRows === 0) {
-            res.status(404).send('Không tìm thấy loại sản phẩm để xóa');
+            res.status(404).send('Không tìm thấy sản phẩm để xóa');
         } else {
-            res.json({ message: ' sản phẩm đã được xóa thành công' });
+            res.json({ message: 'xóa thành công' });
         }
     });
 };
